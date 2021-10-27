@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import folium
 from folium import plugins
+from folium.plugins import MeasureControl, MiniMap
 #import io
 #from PIL import Image
 
@@ -121,6 +122,13 @@ grilla()
     
 
 formatoMouse(myMap)
+
+#Control para medición de distancias
+myMap.add_child(MeasureControl())
+
+#Agregando mini mapa
+minimap = MiniMap()
+myMap.add_child(minimap)
 
 #Generando mapa
 myMap.save('Mapa.html')
