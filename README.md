@@ -34,4 +34,4 @@ Después de ejecutando el ambiente virtual, se debe ingresar la siguiente línea
 pipenv run main.py
 ```
 
-El resultado se visualizará en el archivo Map.html, abrir desde cualquier navegador.
+El resultado se visualizará en el archivo Mapa.html, abrir desde cualquier navegador.
