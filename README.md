@@ -36,3 +36,8 @@ pipenv run main.py
 ```
 
 El resultado se visualizará en el archivo Mapa.html, abrir desde cualquier navegador.
+
+<!-- Sección portada del repositorio -->
+<a href="#">
+    <img src="./portada2.gif" />
+</a>
