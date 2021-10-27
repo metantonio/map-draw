@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import folium
 from folium import plugins
 from folium.plugins import MeasureControl, MiniMap
+import mpu
 #import io
 #from PIL import Image
 
@@ -63,14 +64,19 @@ if (user==1):
     
     
 if (user==2):    
-    data, norte_GMS, este_GMS, coordenadasL = excel_Linea()
+    data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
     myMap = folium.Map(location = coordenadasL[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando líneas entre coordenadas
-    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1).add_to(myMap)
+    dist=[]
+    for i in range(len(este_GMSL)-1):
+        #print(i)
+        dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
+    print("\n distancias entre vértices de la polilínea (km): ",dist)
+    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup=dist).add_to(myMap)
 
 if (user==3):    
     data, norte_GMS, este_GMS, coordenadasC, radio = excel_Circulo()
@@ -85,7 +91,7 @@ if (user==3):
 
 if(user==4):
     data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
-    data, norte_GMS, este_GMS, coordenadasL = excel_Linea()
+    data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
     data, norte_GMS, este_GMS, coordenadasC, radio = excel_Circulo()
     #print(norte_GMS, este_GMS)
 
@@ -97,7 +103,12 @@ if(user==4):
         folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n S:"+str(coordenadas[i][1]))).add_to((myMap))
 
     #Agregando líneas entre coordenadas
-    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1).add_to(myMap)
+    dist=[]
+    for i in range(len(este_GMSL)-1):
+        #print(i)
+        dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
+    print("\n distancias entre vértices de la polilínea (km): ",dist)
+    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup=dist).add_to(myMap)
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
