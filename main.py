@@ -127,7 +127,7 @@ formatoMouse(myMap)
 myMap.add_child(MeasureControl())
 
 #Agregando mini mapa
-minimap = MiniMap()
+minimap = MiniMap(toggle_display=True)
 myMap.add_child(minimap)
 
 #Generando mapa
