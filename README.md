@@ -1,4 +1,4 @@
-# Localizar número celular (no de manera exacta, la API es pública)
+# Dibujar localizaciones, polilíneas, círculos desde coordenadas en Excel
 <!-- Sección portada del repositorio -->
 <a href="#">
     <img src="./portada.jpg" />
@@ -22,10 +22,15 @@ pipenv install
 
 ## Cómo ejecuto el script de Python?
 
-Para ejecutar el script, se debe ejecutar un ambiente virtual, hay que abrir el prompt de Windows, navegar hasta la dirección en que están contenidos los archivos, y ejecutar:
+Para ejecutar el script, se debe ejecutar un ambiente virtual ejecutando el archivo `pipenv shell.bat` o simplemente ejecutando en prompt de Windows: 
 
 ```sh
 pipenv shell
+```
+
+Después de ejecutando el ambiente virtual, se debe ingresar la siguiente línea de código en el prompt de Windows para ejecutar el script de Python:
+
+```sh
 pipenv run main.py
 ```
 
