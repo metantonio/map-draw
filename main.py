@@ -76,7 +76,7 @@ if (user==2):
         #print(i)
         dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
     print("\n distancias entre vértices de la polilínea (km): ",dist)
-    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup=dist).add_to(myMap)
+    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
 
 if (user==3):    
     data, norte_GMS, este_GMS, coordenadasC, radio = excel_Circulo()
@@ -108,7 +108,7 @@ if(user==4):
         #print(i)
         dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
     print("\n distancias entre vértices de la polilínea (km): ",dist)
-    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup=dist).add_to(myMap)
+    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
