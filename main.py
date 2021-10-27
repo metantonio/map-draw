@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import folium
 from folium import plugins
+#import io
+#from PIL import Image
 
 #import of functions.py
 from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo
@@ -51,7 +53,7 @@ if (user==1):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
+    myMap = folium.Map(location = coordenadas[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
@@ -64,7 +66,7 @@ if (user==2):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadasL[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
+    myMap = folium.Map(location = coordenadasL[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando líneas entre coordenadas
     folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1).add_to(myMap)
@@ -74,7 +76,7 @@ if (user==3):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadasC[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
+    myMap = folium.Map(location = coordenadasC[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
@@ -87,7 +89,7 @@ if(user==4):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
+    myMap = folium.Map(location = coordenadas[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
@@ -104,17 +106,10 @@ if(user==4):
 #Agregar Rectángulos (con tuplas desde esquina inferior izq a esquina superior derecha)
 #folium.Rectangle(bounds=[(37.554, 126.95), (37.556, 126.97)],fill=True,color='orange', tooltip='this is Rectangle').add_to(korea)
 
-#Distintas opciones de visualizacion del mapa
-#folium.TileLayer('openstreetmap').add_to(myMap)
-#folium.TileLayer('mapquestopen').add_to(myMap)
-#folium.TileLayer('MapQuest Open Aerial').add_to(myMap)
-#folium.TileLayer('Mapbox Bright').add_to(myMap)
-#folium.TileLayer('Mapbox Control Room').add_to(myMap)
-#folium.TileLayer('stamenterrain').add_to(myMap)
-#folium.TileLayer('stamentoner').add_to(myMap)	
-#folium.TileLayer('cartodbpositron').add_to(myMap)
-#folium.LayerControl().add_to(myMap)
+#Distintas opciones free de visualización de mapas
 folium.TileLayer('openstreetmap').add_to(myMap)
+folium.TileLayer('Stamen Toner').add_to(myMap)
+folium.TileLayer('Stamen Watercolor').add_to(myMap)
 folium.LayerControl().add_to(myMap)
 
 #Agregando la grilla con cada 1 grados de diferencia
@@ -131,6 +126,10 @@ formatoMouse(myMap)
 myMap.save('Mapa.html')
 print("\n mapa creado como: Mapa.html")
 
+#Tratando de generar imagen
+#img_data = myMap._to_png(5)
+#img = Image.open(io.BytesIO(img_data))
+#img.save('Mapa.png')
     
 #example=[]
 #df_excel = pd.read_excel('data.xls', sheet_name='evaluation')
