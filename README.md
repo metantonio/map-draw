@@ -3,7 +3,8 @@
 <a href="#">
     <img src="./portada.jpg" />
 </a>
-Este script en python se realizó para dibujar en un mapa una serie de coordenadas suministradas desde una hoja Excel. 
+
+Este script en python se realizó para dibujar en un mapa una serie de coordenadas suministradas desde una hoja Excel, pensando en usuarios con conocimientos básicos y/o nulos de Python. 
 
 Descargar los archivos en una misma carpeta.
 
