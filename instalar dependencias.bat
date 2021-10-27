@@ -5,6 +5,7 @@ cd /d %~dp0
 cd %
 
 @echo on
+pip install --user pipenv
 pipenv install
 
 echo END
