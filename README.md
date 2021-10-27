@@ -28,7 +28,7 @@ Para ejecutar el script, se debe ejecutar un ambiente virtual ejecutando el arch
 pipenv shell
 ```
 
-Después de ejecutando el ambiente virtual, se debe ingresar la siguiente línea de código en el prompt de Windows para ejecutar el script de Python:
+Después de ejecutado el ambiente virtual, se debe ingresar la siguiente línea de código en el prompt de Windows para ejecutar el script de Python:
 
 ```sh
 pipenv run main.py
