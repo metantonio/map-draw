@@ -51,7 +51,7 @@ if (user==1):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain')
+    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
@@ -64,7 +64,7 @@ if (user==2):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadasL[0], zoom_start = 9, tiles='Stamen Terrain')
+    myMap = folium.Map(location = coordenadasL[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando líneas entre coordenadas
     folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1).add_to(myMap)
@@ -74,7 +74,7 @@ if (user==3):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadasC[0], zoom_start = 9, tiles='Stamen Terrain')
+    myMap = folium.Map(location = coordenadasC[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
@@ -87,7 +87,7 @@ if(user==4):
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
-    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain')
+    myMap = folium.Map(location = coordenadas[0], zoom_start = 9, tiles='Stamen Terrain', control_scale=True)
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
