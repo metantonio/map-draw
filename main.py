@@ -59,7 +59,7 @@ if (user==1):
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
-        folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n S:"+str(coordenadas[i][1]))).add_to((myMap))
+        folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
     
     
@@ -87,7 +87,7 @@ if (user==3):
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
-        folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n S:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
+        folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
 if(user==4):
     data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
@@ -100,7 +100,7 @@ if(user==4):
 
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
-        folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n S:"+str(coordenadas[i][1]))).add_to((myMap))
+        folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
     #Agregando líneas entre coordenadas
     dist=[]
@@ -112,7 +112,7 @@ if(user==4):
 
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
-        folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n S:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
+        folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
 
 #Agregar Rectángulos (con tuplas desde esquina inferior izq a esquina superior derecha)
