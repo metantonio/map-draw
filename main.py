@@ -111,6 +111,24 @@ if(user==4):
 folium.TileLayer('openstreetmap').add_to(myMap)
 folium.TileLayer('Stamen Toner').add_to(myMap)
 folium.TileLayer('Stamen Watercolor').add_to(myMap)
+folium.raster_layers.TileLayer(
+    tiles="http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+    attr="google",
+    name="google maps",
+    max_zoom=20,
+    subdomains=["mt0", "mt1", "mt2", "mt3"],
+    overlay=False,
+    control=True,
+).add_to(myMap)
+folium.raster_layers.TileLayer(
+    tiles="http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    attr="google",
+    name="google street view",
+    max_zoom=20,
+    subdomains=["mt0", "mt1", "mt2", "mt3"],
+    overlay=False,
+    control=True,
+).add_to(myMap)
 folium.LayerControl().add_to(myMap)
 
 #Agregando la grilla con cada 1 grados de diferencia
