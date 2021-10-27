@@ -23,6 +23,9 @@ folium.PolyLine(coordenadas, color="red", weight=2.5, opacity=1).add_to(myMap)
 #Agregar Cículos
 #folium.Circle([latitude5, longitude5], radius=9000, popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n S:"+str(coordenadas[i][1])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
+#Agregar Rectángulos (con tuplas desde esquina inferior izq a esquina superior derecha)
+#folium.Rectangle(bounds=[(37.554, 126.95), (37.556, 126.97)],fill=True,color='orange', tooltip='this is Rectangle').add_to(korea)
+
 #Distintas opciones de visualizacion del mapa
 folium.TileLayer('openstreetmap').add_to(myMap)
 #folium.TileLayer('mapquestopen').add_to(myMap)
