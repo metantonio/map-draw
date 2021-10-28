@@ -28,5 +28,6 @@ def distance2points(lat1,lon1,lat2,lon2):
     dist=(mpu.haversine_distance((lat1, lon1), (lat2, lon2)))
     return dist
           
-print("New Coord: ", distanceAndAngle(10,-66,10,15))
-print("distance(km): ",distance2points(10,-66,10.132699331976822,-65.97623066728403))
+#print("New Coord: ", distanceAndAngle(10,-66,10,15))
+#print("distance(km): ",distance2points(10,-66,10.132699331976822,-65.97623066728403))
+##it gets 14,98 km back 

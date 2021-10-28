@@ -9,8 +9,9 @@ import mpu
 #from PIL import Image
 
 #import of functions.py
-from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo
+from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo, excel_PuntoDistAng
 from eqa2utm import gms2utm, utm2gms
+from distAndAngle import distanceAndAngle, distance2points
 
 #Agregando opción de mostrar coordenadas por donde va pasando el mouse
 def formatoMouse(my_map):
@@ -45,7 +46,7 @@ Menú:
 1-. Dibujar Puntos de Localización
 2-. Dibujar Polilínea
 3-. Dibujar Círculos
-4-. Dibujar Puntos de Localizacion, Polilíneas y Círculos al mismo tiempo. Y transformar coordenadas a UTM
+4-. Dibujar Puntos de Localizacion, Polilíneas, Círculos, y P_DIST_ANG. Y transformar coordenadas a UTM
 5-. Transformar Coordenadas Grado a Coordenadas UTM
 6-. Salir
 """)
@@ -95,6 +96,7 @@ if(user==4):
     data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
     data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
     data, norte_GMSC, este_GMSC, coordenadasC, radio = excel_Circulo()
+    data, norte_GMSP, este_GMSP, coordenadasP, anguloP, distanciaP = excel_PuntoDistAng()
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
@@ -127,16 +129,40 @@ if(user==4):
     df3= pd.DataFrame({'Norte':norte_UTMC, 'Este':este_UTMC, 'Huso':huso_UTMC})
     print("\n Data Vértices Polilínea en UTM \n",df3)
 
+    ######un apartado para conseguir las coords del patrón de radiacion en grados
+    norte_GMSP2=[0]*len(norte_GMSP)
+    este_GMSP2=[0]*len(este_GMSP)
+    for i in range(len(norte_GMSP)):
+        norte_GMSP2[i], este_GMSP2[i] = distanceAndAngle(norte_GMSP[i],este_GMSP[i], anguloP[i], distanciaP[i])
+
+    df4 = pd.DataFrame({'Norte Latitud(grados)':norte_GMSP2, 'Este Longitud(grados)':este_GMSP2, 'Angulo giro (grados)':anguloP, 'Distancia (km)':distanciaP})
+    print("\n Coordenadas patrón de radiacion en Grados \n",df4)
+                   
+    norte_UTMP=[0]*len(norte_GMSP2)
+    este_UTMP=[0]*len(norte_GMSP2)
+    huso_UTMP=[0]*len(norte_GMSP)
+    for i in range(len(norte_GMSP2)):
+        norte_UTMP[i], este_UTMP[i], huso_UTMP[i]= gms2utm(norte_GMSP2[i],este_GMSP2[i])
+    df5= pd.DataFrame({'Norte':norte_UTMP, 'Este':este_UTMP, 'Huso':huso_UTMP, 'Angulo giro (grados)':anguloP, 'Distancia (km)':distanciaP})
+    print("\n Coordenadas patrón de radiacion en UTM \n",df5)
+       
     with pd.ExcelWriter('resultsUTM.xlsx', mode='w') as writer:
         df.to_excel(writer, sheet_name="LOCALIZACION")
         df2.to_excel(writer, sheet_name="LINEA")
         df3.to_excel(writer, sheet_name="CIRCULO")
+        df4.to_excel(writer, sheet_name="P_DIST_ANG_G")
+        df5.to_excel(writer, sheet_name="P_DIST_ANG_UTM")
     print("\n Guardada la transformacion de coordenadas en: resultsUTM.xlsx")
     
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
         folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
+    print("\n Dibujar marcadores de localización de los vértices del perímetro de radiación?? ")
+    desicion=int(input("\n 1)Sí \n 2)No \n"))
+    if (desicion==1):
+        for i in range(len(norte_GMSP2)):
+            folium.Marker((norte_GMSP2[i],este_GMSP2[i]),popup = (str(i)+"\n N:"+str(norte_GMSP2[i])+"\n E:"+str(este_GMSP2[i]))).add_to((myMap))
     #Agregando líneas entre coordenadas
     dist=[]
     for i in range(len(este_GMSL)-1):
@@ -145,6 +171,17 @@ if(user==4):
     print("\n distancias entre vértices de la polilínea (km): ",dist)
     folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
 
+    dist=[]
+    for i in range(len(este_GMSP2)-1):
+        #print(i)
+        dist.append(mpu.haversine_distance((norte_GMSP2[int(i)], este_GMSP2[int(i)]), (norte_GMSP2[int(i)+1], este_GMSP2[int(i)+1])))
+    #print("\n distancias entre vértices de la polilínea (km): ",dist)
+    coordenadasRadiacion=[]
+    for i in range(len(norte_GMSP2)):
+        coordenadasRadiacion.append([norte_GMSP2[i],este_GMSP2[i]])
+        
+    folium.PolyLine(coordenadasRadiacion, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
+    
     #Agregando círculos en las coordenadas
     for i in range(len(coordenadasC)):
         folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
