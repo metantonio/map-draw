@@ -11,6 +11,8 @@ numpy = "*"
 matplotlib = "*"
 xlrd = "*"
 mpu = "*"
+pyproj = "*"
+openpyxl = "*"
 
 [dev-packages]
 

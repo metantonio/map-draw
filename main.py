@@ -10,6 +10,7 @@ import mpu
 
 #import of functions.py
 from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo
+from eqa2utm import gms2utm, utm2gms
 
 #Agregando opción de mostrar coordenadas por donde va pasando el mouse
 def formatoMouse(my_map):
@@ -44,8 +45,9 @@ Menú:
 1-. Dibujar Puntos de Localización
 2-. Dibujar Polilínea
 3-. Dibujar Círculos
-4-. Dibujar Puntos de Localizacion, Polilíneas y Círculos al mismo tiempo
-5-. Salir
+4-. Dibujar Puntos de Localizacion, Polilíneas y Círculos al mismo tiempo. Y transformar coordenadas a UTM
+5-. Transformar Coordenadas Grado a Coordenadas UTM
+6-. Salir
 """)
 
 user=int(input("\n Elige una opción \n"))
@@ -92,12 +94,45 @@ if (user==3):
 if(user==4):
     data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
     data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
-    data, norte_GMS, este_GMS, coordenadasC, radio = excel_Circulo()
+    data, norte_GMSC, este_GMSC, coordenadasC, radio = excel_Circulo()
     #print(norte_GMS, este_GMS)
 
     #Creando Mapa
     myMap = folium.Map(location = coordenadas[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
 
+    norte_UTM=[0]*len(norte_GMS)
+    este_UTM=[0]*len(norte_GMS)
+    huso_UTM=[0]*len(norte_GMS)
+    for i in range(len(norte_GMS)):
+        norte_UTM[i], este_UTM[i], huso_UTM[i]= gms2utm(norte_GMS[i],este_GMS[i])
+
+    df= pd.DataFrame({'Norte':norte_UTM, 'Este':este_UTM, 'Huso':huso_UTM})
+    print("\n Data Localización en UTM \n",df)
+
+    norte_UTML=[0]*len(norte_GMSL)
+    este_UTML=[0]*len(norte_GMSL)
+    huso_UTML=[0]*len(norte_GMSL)
+    for i in range(len(norte_GMSL)):
+        norte_UTML[i], este_UTML[i], huso_UTML[i]= gms2utm(norte_GMSL[i],este_GMSL[i])
+
+    df2= pd.DataFrame({'Norte':norte_UTML, 'Este':este_UTML, 'Huso':huso_UTML})
+    print("\n Data Vértices Polilínea en UTM \n",df2)
+
+    norte_UTMC=[0]*len(norte_GMSC)
+    este_UTMC=[0]*len(norte_GMSC)
+    huso_UTMC=[0]*len(norte_GMSC)
+    for i in range(len(norte_GMSC)):
+        norte_UTMC[i], este_UTMC[i], huso_UTMC[i]= gms2utm(norte_GMSC[i],este_GMSC[i])
+
+    df3= pd.DataFrame({'Norte':norte_UTMC, 'Este':este_UTMC, 'Huso':huso_UTMC})
+    print("\n Data Vértices Polilínea en UTM \n",df3)
+
+    with pd.ExcelWriter('resultsUTM.xlsx', mode='w') as writer:
+        df.to_excel(writer, sheet_name="LOCALIZACION")
+        df2.to_excel(writer, sheet_name="LINEA")
+        df3.to_excel(writer, sheet_name="CIRCULO")
+    print("\n Guardada la transformacion de coordenadas en: resultsUTM.xlsx")
+    
     #Agregando marcas de posición a las coordenadas
     for i in range(len(coordenadas)):
         folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
@@ -114,7 +149,49 @@ if(user==4):
     for i in range(len(coordenadasC)):
         folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
+#Transformacion a Coordenadas UTM:
+if(user==5):
+    data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
+    data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
+    data, norte_GMSC, este_GMSC, coordenadasC, radio = excel_Circulo()
 
+    #Creando Mapa
+    myMap = folium.Map(location = coordenadas[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
+
+    norte_UTM=[0]*len(norte_GMS)
+    este_UTM=[0]*len(norte_GMS)
+    huso_UTM=[0]*len(norte_GMS)
+    for i in range(len(norte_GMS)):
+        norte_UTM[i], este_UTM[i], huso_UTM[i]= gms2utm(norte_GMS[i],este_GMS[i])
+
+    df= pd.DataFrame({'Norte':norte_UTM, 'Este':este_UTM, 'Huso':huso_UTM})
+    print("\n Data Localización en UTM \n",df)
+
+    norte_UTML=[0]*len(norte_GMSL)
+    este_UTML=[0]*len(norte_GMSL)
+    huso_UTML=[0]*len(norte_GMSL)
+    for i in range(len(norte_GMSL)):
+        norte_UTML[i], este_UTML[i], huso_UTML[i]= gms2utm(norte_GMSL[i],este_GMSL[i])
+
+    df2= pd.DataFrame({'Norte':norte_UTML, 'Este':este_UTML, 'Huso':huso_UTML})
+    print("\n Data Vértices Polilínea en UTM \n",df2)
+
+    norte_UTMC=[0]*len(norte_GMSC)
+    este_UTMC=[0]*len(norte_GMSC)
+    huso_UTMC=[0]*len(norte_GMSC)
+    for i in range(len(norte_GMSC)):
+        norte_UTMC[i], este_UTMC[i], huso_UTMC[i]= gms2utm(norte_GMSC[i],este_GMSC[i])
+
+    df3= pd.DataFrame({'Norte':norte_UTMC, 'Este':este_UTMC, 'Huso':huso_UTMC})
+    print("\n Data Vértices Polilínea en UTM \n",df3)
+
+    with pd.ExcelWriter('resultsUTM.xlsx', mode='w') as writer:
+        df.to_excel(writer, sheet_name="LOCALIZACION")
+        df2.to_excel(writer, sheet_name="LINEA")
+        df3.to_excel(writer, sheet_name="CIRCULO")
+                
+    print("\n Guardada la transformacion de coordenadas en: resultsUTM.xlsx")
+    
 #Agregar Rectángulos (con tuplas desde esquina inferior izq a esquina superior derecha)
 #folium.Rectangle(bounds=[(37.554, 126.95), (37.556, 126.97)],fill=True,color='orange', tooltip='this is Rectangle').add_to(korea)
 
@@ -162,6 +239,8 @@ myMap.add_child(minimap)
 #Generando mapa
 myMap.save('Mapa.html')
 print("\n mapa creado como: Mapa.html")
+
+
 
 #Tratando de generar imagen
 #img_data = myMap._to_png(5)
