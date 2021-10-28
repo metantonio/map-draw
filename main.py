@@ -38,6 +38,15 @@ def grilla():
     for lon in range(-180, 181, lon_interval):
         folium.PolyLine([[-90, lon],[90, lon]], weight=0.5).add_to(myMap) 
 
+#comprobacion de data vacia
+def is_empty(data_structure):
+    if data_structure:
+        #print("No está vacía", data_structure)
+        return False
+    else:
+        #print("Está vacía")
+        return True
+
 #Menú de Bienvenida
 print("""\n Bienvenidos al Script mapa-draw.
 
@@ -155,8 +164,9 @@ if(user==4):
     print("\n Guardada la transformacion de coordenadas en: resultsUTM.xlsx")
     
     #Agregando marcas de posición a las coordenadas
-    for i in range(len(coordenadas)):
-        folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
+    if (is_empty(coordenadas)==False):
+        for i in range(len(coordenadas)):
+            folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
     print("\n Dibujar marcadores de localización de los vértices del perímetro de radiación?? ")
     desicion=int(input("\n 1)Sí \n 2)No \n"))
@@ -168,8 +178,9 @@ if(user==4):
     for i in range(len(este_GMSL)-1):
         #print(i)
         dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
-    print("\n distancias entre vértices de la polilínea (km): ",dist)
-    folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
+    if (is_empty(coordenadasL)==False):
+        print("\n distancias entre vértices de la polilínea (km): ",dist)
+        folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
 
     dist=[]
     for i in range(len(este_GMSP2)-1):
@@ -179,12 +190,13 @@ if(user==4):
     coordenadasRadiacion=[]
     for i in range(len(norte_GMSP2)):
         coordenadasRadiacion.append([norte_GMSP2[i],este_GMSP2[i]])
-        
-    folium.PolyLine(coordenadasRadiacion, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
+    if (is_empty(coordenadasRadiacion)==False):    
+        folium.PolyLine(coordenadasRadiacion, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
     
     #Agregando círculos en las coordenadas
-    for i in range(len(coordenadasC)):
-        folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
+    if (is_empty(coordenadasC)==False):
+        for i in range(len(coordenadasC)):
+            folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
 #Transformacion a Coordenadas UTM:
 if(user==5):
