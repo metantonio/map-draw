@@ -39,5 +39,5 @@ El resultado se visualizará en el archivo Mapa.html, abrir desde cualquier nave
 
 <!-- Sección portada del repositorio -->
 <a href="#">
-    <img src="./portada2.gif" />
+    <img src="./portadagif.gif" />
 </a>
