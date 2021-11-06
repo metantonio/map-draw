@@ -1,7 +1,7 @@
 # Dibujar localizaciones, polilíneas, círculos desde coordenadas en Excel
 <!-- Sección portada del repositorio -->
 <a href="#">
-    <img src="./portada.jpg" />
+    <img src="./portadagif.gif" />
 </a>
 
 Este script en python se realizó para dibujar en un mapa una serie de coordenadas suministradas desde una hoja Excel, pensando en usuarios con conocimientos básicos y/o nulos de Python. 
