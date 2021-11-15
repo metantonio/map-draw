@@ -49,6 +49,7 @@ def is_empty(data_structure):
 
 #Menú de Bienvenida
 print("""\n Bienvenidos al Script mapa-draw.
+Elaborado por: antonio_martinez88@hotmail.com
 
 Menú:
 
