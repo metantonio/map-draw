@@ -1,0 +1,10 @@
+pipenv shell
+
+pip install pyinstaller
+
+pyinstaller --onefile --paths='C:\Users\anton\.virtualenvs\map-draw-QnHa0Wgr\Lib\site-packages' --paths='D:\program files (x86)\microsoft visual studio\shared\python36_64\lib\site-packages' --paths='C:\Users\anton\AppData\Roaming\Python\Python36\site-packages' --paths='C:\Users\anton\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages' --paths='C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.2288.0_x64__qbz5n2kfra8p0\lib\site-packages' main.py
+
+otro work-around es agregar las direcciones manualmente en el main.spec y hacer:
+pyinstaller --onefile main.spec
+
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.2288.0_x64__qbz5n2kfra8p0\lib\site-packages

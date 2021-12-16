@@ -14,8 +14,14 @@ mpu = "*"
 pyproj = "*"
 openpyxl = "*"
 python-math = "*"
+pyinstaller = "*"
+jsonschema = "*"
+nbconvert = "*"
+gevent = "*"
+importlib-metadata = "*"
 
 [dev-packages]
+pyinstaller = "*"
 
 [requires]
 python_version = "3.9"
