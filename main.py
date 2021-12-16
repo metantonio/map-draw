@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import folium
 from folium import plugins
-from folium.plugins import MeasureControl, MiniMap
+from folium.plugins import MeasureControl, MiniMap, HeatMap
 import mpu
 #import io
 #from PIL import Image
