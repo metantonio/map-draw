@@ -5,13 +5,14 @@ import folium
 from folium import plugins
 from folium.plugins import MeasureControl, MiniMap, HeatMap
 import mpu
+import itertools
 #import io
 #from PIL import Image
 
 #import of functions.py
 from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo, excel_PuntoDistAng
 from eqa2utm import gms2utm, utm2gms
-from distAndAngle import distanceAndAngle, distance2points
+from distAndAngle import distanceAndAngle, distance2points, distanceAndAngleInterpolation
 
 #Agregando opción de mostrar coordenadas por donde va pasando el mouse
 def formatoMouse(my_map):
@@ -152,11 +153,17 @@ def menuPpal(user):
         ######un apartado para conseguir las coords del patrón de radiacion en grados
         norte_GMSP2=[0]*len(norte_GMSP)
         este_GMSP2=[0]*len(este_GMSP)
+        dataHeatMap=[]
+        #auxlist=[]
         for i in range(len(norte_GMSP)):
             norte_GMSP2[i], este_GMSP2[i] = distanceAndAngle(norte_GMSP[i],este_GMSP[i], anguloP[i], distanciaP[i])
-
+            auxlist=distanceAndAngleInterpolation(norte_GMSP[i],este_GMSP[i], anguloP[i], distanciaP[i], heatmapP[i])
+            for element in auxlist:
+                dataHeatMap.append(element)
+            
         df4 = pd.DataFrame({'Norte Latitud(grados)':norte_GMSP2, 'Este Longitud(grados)':este_GMSP2, 'Angulo giro (grados)':anguloP, 'Distancia (km)':distanciaP})
         print("\n Coordenadas patrón de radiacion en Grados \n",df4)
+        #print('interpolacion',dataHeatMap)
                        
         norte_UTMP=[0]*len(norte_GMSP2)
         este_UTMP=[0]*len(norte_GMSP2)
@@ -174,11 +181,12 @@ def menuPpal(user):
             df5.to_excel(writer, sheet_name="P_DIST_ANG_UTM")
         print("\n Guardada la transformacion de coordenadas en: resultsUTM.xlsx")
         
-        #Agregando marcas de posición a las coordenadas
+        #Agregando marcas de posición a las coordenadas de la hoja de Localizacion
         if (is_empty(coordenadas)==False):
             for i in range(len(coordenadas)):
                 folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
+        #Agregando marcas de posición a las coordenadas de la hoja de Punto_Ang_distancia
         print("\n Dibujar marcadores de localización de los vértices del perímetro de radiación?? ")
         desicion=int(input("\n 1)Sí \n 2)No \n"))
         if (desicion==1):
@@ -208,17 +216,14 @@ def menuPpal(user):
         if (is_empty(coordenadasC)==False):
             for i in range(len(coordenadasC)):
                 folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
+
         print("\n Dibujar mapa de calor del patrón de radiación?? ")
         desicion=int(input("\n 1)Sí \n 2)No \n"))
         if (desicion==1):
             heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
-            HeatMap(heatMapData, name="Mapa de radiacion", gradient={0.0:'blue',
-                                           0.5:'cyan',
-                                           0.6:'lime',
-                                           0.7:'green',
-                                           0.8:'yellow',
-                                           0.9:'orange',
-                                           1.0:'red'}).add_to(myMap)
+            #dataFinal=[]
+            dataFinal=[*heatMapData, *dataHeatMap]
+            HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.3:'blue', 0.5:'cyan', 0.6:'lime', 0.7:'green', 0.8:'yellow', 0.9:'orange', 1.0:'red'}).add_to(myMap)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
