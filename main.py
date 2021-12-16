@@ -212,7 +212,7 @@ def menuPpal(user):
         desicion=int(input("\n 1)Sí \n 2)No \n"))
         if (desicion==1):
             heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
-            HeatMap(heatMapData, gradient={0.0:'blue',
+            HeatMap(heatMapData, name="Mapa de radiacion", gradient={0.0:'blue',
                                            0.5:'cyan',
                                            0.6:'lime',
                                            0.7:'green',
