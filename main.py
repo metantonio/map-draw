@@ -47,6 +47,15 @@ def is_empty(data_structure):
         #print("Está vacía")
         return True
 
+def heatMap(norteLista, esteLista, heatmapLista):
+    data=[]
+    i=0
+    for element in norteLista:
+        data.append([element, esteLista[i], heatmapLista[i]])
+        i=i+1
+    #print("este es la data del heatmap", data)
+    return data
+
 #Menú de Bienvenida
 print("""\n Bienvenidos al Script mapa-draw.
 Elaborado por: antonio_martinez88@hotmail.com
@@ -199,6 +208,11 @@ def menuPpal(user):
         if (is_empty(coordenadasC)==False):
             for i in range(len(coordenadasC)):
                 folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
+        print("\n Dibujar mapa de calor del patrón de radiación?? ")
+        desicion=int(input("\n 1)Sí \n 2)No \n"))
+        if (desicion==1):
+            heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
+            HeatMap(heatMapData).add_to(myMap)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
