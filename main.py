@@ -311,6 +311,7 @@ if __name__ == '__main__':
     while userOp1<6:
         myMap=menuPpal(userOp1)
         generatingMap(myMap)
+        userOp1=int(input("\n Elige una opción \n"))
         if userOp1==6:
             break
 
