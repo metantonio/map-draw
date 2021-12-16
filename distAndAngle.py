@@ -31,7 +31,7 @@ def distance2points(lat1,lon1,lat2,lon2):
 def distanceAndAngleInterpolation(latitude, longitude, angulo, distance, heat):
     R = 6378.137 #Radius of the Earth WSG-84
     if heat>1:
-        heat=1
+        heat=heat/100
     diferencia=1-heat
     lista=[]
     for i in range(100):
