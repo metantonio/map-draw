@@ -223,7 +223,7 @@ def menuPpal(user):
             heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
             #dataFinal=[]
             dataFinal=[*heatMapData, *dataHeatMap]
-            HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.3:'blue', 0.5:'cyan', 0.6:'lime', 0.7:'green', 0.8:'yellow', 0.9:'orange', 1.0:'red'}).add_to(myMap)
+            HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.3:'blue', 0.5:'cyan', 0.6:'lime', 0.7:'yellow', 0.8:'orange', 1.0:'red'}).add_to(myMap)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
