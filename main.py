@@ -217,13 +217,13 @@ def menuPpal(user):
             for i in range(len(coordenadasC)):
                 folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
-        print("\n Dibujar mapa de calor del patrón de radiación?? ")
-        desicion=int(input("\n 1)Sí \n 2)No \n"))
-        if (desicion==1):
-            heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
-            #dataFinal=[]
-            dataFinal=[*heatMapData, *dataHeatMap]
-            HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.3:'blue', 0.5:'cyan', 0.6:'lime', 0.7:'yellow', 0.8:'orange', 1.0:'red'}).add_to(myMap)
+        #print("\n Dibujar mapa de calor del patrón de radiación?? ")
+        #desicion=int(input("\n 1)Sí \n 2)No \n"))
+        #if (desicion==1):
+        heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
+        #dataFinal=[]
+        dataFinal=[*heatMapData, *dataHeatMap]
+        HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.5:'blue', 0.6:'cyan', 0.7:'lime', 0.8:'yellow', 0.9:'orange', 1.0:'red'}).add_to(myMap)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
