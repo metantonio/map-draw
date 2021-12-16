@@ -78,18 +78,20 @@ def excel_PuntoDistAng():
     angulo=[]
     feature=[]
     distancia=[]
+    heatmap=[]
     for i in range(df_dataset_lenght):
         norte_GMS.append(df_excel.iloc[i,6]) #el index en para extraer data de columnas empieza en 0, por eso es columna 6 y no 7
         este_GMS.append(df_excel.iloc[i,11])
         angulo.append(df_excel.iloc[i,12])
         distancia.append(df_excel.iloc[i,13])
+        heatmap.append(df_excel.iloc[i,14])
         feature.append([df_excel.iloc[i,6],df_excel.iloc[i,11]])
         #print("\n Norte: " + str(norte_GMS[i]) + " Este: " + str(este_GMS[i]))
     data = pd.DataFrame(feature, columns=["Norte/Sur","Este/Oeste"])
     #print("\n Coordenadas Círculo: \n", data)
     #print(feature)
     #print("\n initial weights \n", weights)
-    return data, norte_GMS, este_GMS, feature, angulo, distancia
+    return data, norte_GMS, este_GMS, feature, angulo, distancia, heatmap
  
 def save_csv(data, weights, bias, l_rate, epochs, epoch_loss, loss, average_loss):
     print("\n Weights: \n",weights)

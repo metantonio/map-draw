@@ -107,7 +107,7 @@ def menuPpal(user):
         data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
         data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
         data, norte_GMSC, este_GMSC, coordenadasC, radio = excel_Circulo()
-        data, norte_GMSP, este_GMSP, coordenadasP, anguloP, distanciaP = excel_PuntoDistAng()
+        data, norte_GMSP, este_GMSP, coordenadasP, anguloP, distanciaP, heatmapP = excel_PuntoDistAng()
         #print(norte_GMS, este_GMS)
 
         #Creando Mapa
