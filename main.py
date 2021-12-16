@@ -51,8 +51,11 @@ def is_empty(data_structure):
 def heatMap(norteLista, esteLista, heatmapLista):
     data=[]
     i=0
+    heat=0
     for element in norteLista:
-        data.append([element, esteLista[i], heatmapLista[i]])
+        if heatmapLista[i]>1:
+            heat=heatmapLista[i]/100
+        data.append([element, esteLista[i], heat])
         i=i+1
     #print("este es la data del heatmap", data)
     return data
