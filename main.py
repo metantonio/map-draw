@@ -226,7 +226,7 @@ def menuPpal(user):
         heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
         #dataFinal=[]
         dataFinal=[*heatMapData, *dataHeatMap]
-        HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.1:'black', 0.5:'blue', 0.6:'cyan', 0.7:'lime', 0.8:'yellow', 0.9:'orange', 1.0:'red'}).add_to(myMap)
+        HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.1:'black', 0.5:'blue', 0.6:'cyan', 0.7:'lime', 0.8:'yellow', 0.9:'orange', 1.0:'red'}, blur=25).add_to(myMap)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
@@ -339,6 +339,17 @@ if __name__ == '__main__':
     while userOp1<6:
         myMap=menuPpal(userOp1)
         generatingMap(myMap)
+        print("""\n Regresando al Menú Principal
+
+        Menú:
+
+        1-. Dibujar Puntos de Localización
+        2-. Dibujar Polilínea
+        3-. Dibujar Círculos
+        4-. Dibujar Puntos de Localizacion, Polilíneas, Círculos, y P_DIST_ANG. Y transformar coordenadas a UTM
+        5-. Transformar Coordenadas Grado a Coordenadas UTM
+        6-. Salir
+        """)
         userOp1=int(input("\n Elige una opción \n"))
         if userOp1==6:
             break
