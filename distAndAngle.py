@@ -1,7 +1,7 @@
 import math
 import mpu
 
-brng = 1.57 #Bearing is 90 degrees converted to radians.
+brng = 1.57079632679 #Bearing is 90 degrees converted to radians.
 d = 15 #Distance in km
 
 def distanceAndAngle(latitude, longitude, angulo, distance):
