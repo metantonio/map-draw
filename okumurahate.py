@@ -1,32 +1,32 @@
 import math
 
-##Coloque la frecuencia de trabajo de la onda (MHz): 
+##Coloque la frecuencia de trabajo de la onda (MHz):
 ##850
-##Potencia media del campo eléctrico (dBu): 
+##Potencia media del campo eléctrico (dBu):
 ##33
 ##
-## INFORMACION DE LA ESTACION BASE 
+## INFORMACION DE LA ESTACION BASE
 ##
-##Potencia de Transmisión (W): 
+##Potencia de Transmisión (W):
 ##15
-##Pérdidas en el terminal (dB): 
+##Pérdidas en el terminal (dB):
 ##3.4
-##Ganacia de la antena de Transmisión (dBi): 
+##Ganacia de la antena de Transmisión (dBi):
 ##8
-##Altura de la Antena transmisora TX (m): 
+##Altura de la Antena transmisora TX (m):
 ##30
 ##
-## INFORMACION DE LA ESTACION MÓVIL 
+## INFORMACION DE LA ESTACION MÓVIL
 ##
-##Potencia de Transmisión móvil (W): 
+##Potencia de Transmisión móvil (W):
 ##1
-##Pérdidas en el terminal móvil (dB): 
+##Pérdidas en el terminal móvil (dB):
 ##0.5
-##Ganacia de la antena de Transmisión móvil (dBi): 
+##Ganacia de la antena de Transmisión móvil (dBi):
 ##2.14
-##Altura de la Antena receptora RX (m): 
+##Altura de la Antena receptora RX (m):
 ##3
-##Distancia horizontal(km): 
+##Distancia horizontal(km):
 ##8
 
 def okumura():
@@ -46,7 +46,7 @@ def okumura():
     gananciaRX = float(input("Ganacia de la antena de Transmisión móvil (dBi): \n"))
     alturaRX = float(input("Altura de la Antena receptora RX (m): \n"))
     #distancia = float(input("Distancia horizontal(km): \n"))
-    
+
     print("""
     Condiciones del entorno:
 
@@ -96,14 +96,16 @@ def okumura():
 
     lUrbano2 = potenciaAparente - campoElectrico + 20*math.log(frecuencia,10)+79.4
     print("\n Pérdidas urbanas Lurbano2 (dB): ", lUrbano2)
-    #print('\n Pérdida urbanas Lurbano (dB): ', lUrbano)    
+    #print('\n Pérdida urbanas Lurbano (dB): ', lUrbano)
 
     distanciaCobertura = math.pow(10,(lUrbano2-69.55-26.16*math.log(frecuencia,10)+13.82*math.log(alturaTX,10)+correccion)/(44.9-6.5*math.log(alturaTX,10)))
     print('\n Distancia de cobertura (km):', distanciaCobertura)
 
     Efs = 106.9-20*math.log(distanciaCobertura,10)
-    print('\n Intensidad de campo en espacio libre para una p.r.a de 1 kW y la distancia propuesta (dB/m): ', Efs)
-    
+    print('\n Intensidad de campo en espacio libre para una p.r.a de 1 kW y la distancia propuesta (dB): ', Efs)
+
+    EOkumura = 69.82-6.16*math.log(frecuencia,10)+13.82*math.log(alturaTX,10)+(1.1*math.log(frecuencia,10)-0.7)*alturaRX-(1.56*math.log(frecuencia,10)-0.8)-(44.9-6.55*math.log(alturaTX,10))*(math.log(distanciaCobertura,10))
+    print('\n Intensidad Okumura para una p.r.a de 1kW:', EOkumura)
     return lUrbano2, distanciaCobertura
 
 okumura()
