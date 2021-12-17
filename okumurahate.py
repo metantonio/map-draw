@@ -42,7 +42,7 @@ def okumura():
             correccion = 3.2*(math.log(11.75*alturaRX,10))*2-4.97
             ld = 69.55+26.16*math.log(frecuencia,10)-13.82*math.log(alturaTX,10)-correccion+(44.9-6.55*math.log(alturaTX,10)*math.log(distancia,10))
         lUrbano = ld -2*math.pow(4.78*math.log(frecuencia),2)+18.33*math.log(frecuencia,10)-40.94
-    print(lUrbano)
+    print('\n Pérdida:', lUrbano)
     return lUrbano
 
 okumura()
