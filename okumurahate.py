@@ -49,16 +49,16 @@ def okumura():
     print('\n INFORMACION DE LA ESTACION BASE \n')
     potenciaTX = float(input("Potencia de Transmisión (W): \n"))
     perdidasTX = float(input("Pérdidas en el terminal (dB): \n"))
-    #gananciaTX = float(input("Ganacia de la antena de Transmisión (dBi): \n"))
+    gananciaTX = float(input("Ganacia de la antena de Transmisión (dBi): \n"))
     alturaTX = float(input("Altura de la Antena transmisora TX (m): \n"))
-    gananciaTX = 20*math.log(alturaTX,10)
-    print('\n Ganancia TX: ', gananciaTX)
+    #gananciaTX = 20*math.log(alturaTX/200,10)
+    
 
     #Informacion de la estación móvil
     print('\n INFORMACION DE LA ESTACION MÓVIL \n')
     potenciaRX = float(input("Potencia de Transmisión móvil (W): \n"))
     perdidasRX = float(input("Pérdidas en el terminal móvil (dB): \n"))
-    gananciaRX = float(input("Ganacia de la antena de Transmisión móvil (dBi): \n"))
+    #gananciaRX = float(input("Ganacia de la antena de Transmisión móvil (dBi): \n"))
     alturaRX = float(input("Altura de la Antena receptora RX (m): \n"))
     if(alturaRX<=3):
         gananciaRX = 10*math.log(alturaRX/3,10)
@@ -106,7 +106,8 @@ def okumura():
         lUrbano = ld -2*math.pow(4.78*math.log(frecuencia),2)+18.33*math.log(frecuencia,10)-40.94
 
     #resultados
-    
+    print('\n Ganancia TX: ', gananciaTX)
+    print('\n Ganancia RX: ', gananciaRX)
 
     print('\n Factor de Corrección atenuacion Okumura(dB): ', correccion)
     potenciaBase = 10*math.log(potenciaTX/(0.001),10)
@@ -117,7 +118,7 @@ def okumura():
 
     lUrbano2 = potenciaAparente - campoElectrico + 20*math.log(frecuencia,10)+79.4
     #print("\n Pérdidas urbanas Lurbano2 (dB): ", lUrbano2)
-    print('\n Pérdida urbanas Lurbano Okumura (dB): ', lUrbano)
+    #print('\n Pérdida urbanas Lurbano Okumura (dB): ', lUrbano)
 
     distanciaCobertura = math.pow(10,(lUrbano2-69.55-26.16*math.log(frecuencia,10)+13.82*math.log(alturaTX,10)+correccion)/(44.9-6.5*math.log(alturaTX,10)))
     #print('\n Distancia de cobertura (km):', distanciaCobertura)
@@ -126,15 +127,16 @@ def okumura():
     print('\n Intensidad de campo en espacio libre para una p.r.a de 1 kW y la distancia propuesta (dB): ', Efs)
 
     perdidaAmbiente = 10*math.log((math.pow(LOnda,2)/(16*distancia*distancia*3.1415*3.1415*1000000)),10)
-    print('\n perdida ambiente Lf (dB):', perdidaAmbiente)
+    print('\n perdida propagacion libre Lf (dB):', perdidaAmbiente)
 
        
-    #EOkumura = 69.82-6.16*math.log(frecuencia,10)+13.82*math.log(alturaTX,10)+(1.1*math.log(frecuencia,10)-0.7)*alturaRX-(1.56*math.log(frecuencia,10)-0.8)-(44.9-6.55*math.log(alturaTX,10))*(math.log(distancia,10))
-    #print('\n Intensidad Okumura para una p.r.a de 1kW:', EOkumura)
-    LOkumura=lUrbano
+    EOkumura = 69.82-6.16*math.log(frecuencia,10)+13.82*math.log(alturaTX,10)+(1.1*math.log(frecuencia,10)-0.7)*alturaRX-(1.56*math.log(frecuencia,10)-0.8)-(44.9-6.55*math.log(alturaTX,10))*(math.log(distancia,10))
+    print('\n Intensidad Okumura para una p.r.a de 1kW:', EOkumura)
+    LOkumura=EOkumura
 
     #Perdida media en el percentil 50
-    L50 = -perdidaAmbiente + LOkumura - gananciaTX - gananciaRX - campoElectrico 
+    L50 = -perdidaAmbiente + LOkumura - gananciaTX - gananciaRX - campoElectrico
+    print("\n L50 (dB): ", L50)
 
     #Potencia máxima radiada por la antena transmisora en la dirección y ganancia
     #de la antena en dicho radial, EIRP
