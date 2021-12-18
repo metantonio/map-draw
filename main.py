@@ -183,6 +183,7 @@ def menuPpal(user):
                 folium.Marker((norte_GMSP2[i],este_GMSP2[i]),popup = (str(i)+"\n N:"+str(norte_GMSP2[i])+"\n E:"+str(este_GMSP2[i]))).add_to((myMap))
         #Agregando líneas entre coordenadas
         dist=[]
+        
         for i in range(len(este_GMSL)-1):
             #print(i)
             dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
@@ -195,12 +196,17 @@ def menuPpal(user):
             #print(i)
             dist.append(mpu.haversine_distance((norte_GMSP2[int(i)], este_GMSP2[int(i)]), (norte_GMSP2[int(i)+1], este_GMSP2[int(i)+1])))
         #print("\n distancias entre vértices de la polilínea (km): ",dist)
+
+        #Dibujo del perimetro
         coordenadasRadiacion=[]
-        for i in range(len(norte_GMSP2)):
-            coordenadasRadiacion.append([norte_GMSP2[i],este_GMSP2[i]])
-        if (is_empty(coordenadasRadiacion)==False):    
-            folium.PolyLine(coordenadasRadiacion, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
-        
+        print("\n Dibujar polilínea del perímetro de radiación?? ")
+        desicion=int(input("\n 1)Sí \n 2)No \n"))
+        if (desicion==1):
+            for i in range(len(norte_GMSP2)):
+                coordenadasRadiacion.append([norte_GMSP2[i],este_GMSP2[i]])
+            if (is_empty(coordenadasRadiacion)==False):    
+                folium.PolyLine(coordenadasRadiacion, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
+            
         #Agregando círculos en las coordenadas
         if (is_empty(coordenadasC)==False):
             for i in range(len(coordenadasC)):
