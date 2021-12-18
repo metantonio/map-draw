@@ -30,14 +30,14 @@ def distance2points(lat1,lon1,lat2,lon2):
 
 def distanceAndAngleInterpolation(latitude, longitude, angulo, distance, heat):
     R = 6378.137 #Radius of the Earth WSG-84
-    if heat>1:
-        heat=heat/100
+    
+    heat=heat/100
     diferencia=1-heat
     lista=[]
-    for i in range(100):
+    for i in range(201):
         
-        d=i*distance/(100) #Distance in km
-        heatInterpo=1-(diferencia*i/100)
+        d=i*distance/(200) #Distance in km
+        heatInterpo=1-(diferencia*i/200)
         brng = math.radians(angulo)
         lat1 = math.radians(latitude) #Current lat point converted to radians
         lon1 = math.radians(longitude) #Current long point converted to radians

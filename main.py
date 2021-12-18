@@ -68,7 +68,7 @@ def menuPpal(user):
         #print(norte_GMS, este_GMS)
 
         #Creando Mapa
-        myMap = folium.Map(location = coordenadas[0], zoom_start = 10, tiles='Stamen Terrain', control_scale=True)
+        myMap = folium.Map(location = coordenadas[0], zoom_start = 18, tiles='Stamen Terrain', control_scale=True)
 
         #Agregando marcas de posición a las coordenadas
         for i in range(len(coordenadas)):
@@ -215,8 +215,10 @@ def menuPpal(user):
         #HEATMAP
         heatMapData=heatMap(norte_GMSP2, este_GMSP2, heatmapP)
         #dataFinal=[]
-        dataFinal=[*heatMapData, *dataHeatMap]
-        HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.1:'purple', 0.5:'blue', 0.6:'cyan', 0.7:'lime', 0.8:'yellow', 1.0:'red'}, blur=60, max_zoom=16, radius=50).add_to(myMap)
+        dataFinal=[*dataHeatMap, *heatMapData]
+        #dataFinal = heatMapData+dataHeatMap
+        HeatMap(dataFinal, name="Mapa de radiacion", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=10, radius=40, min_opacity=0.1, max_zoom=12).add_to(myMap)
+        #print('Puntos de Control del HeatMap: \n', dataFinal)
 
     #Transformacion a Coordenadas UTM:
     if(user==5):
@@ -348,6 +350,7 @@ if __name__ == '__main__':
         """)
         userOp1=int(input("\n Elige una opción \n"))
         if userOp1==6:
+            print('Cerrando la aplicación...')
             break
 
 #Código creado por:
