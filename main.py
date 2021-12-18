@@ -221,7 +221,7 @@ def menuPpal(user):
         desicion=int(input("\n 1)Colorear Área de Radiación (Área Perímetro correcta, interna no tanto) \n 2)Colorear Realidad experimental (Correcto, tarda en visualizar) \n 3)No dibujar \n"))
         if (desicion==1):
             HeatMap(heatMapData, name="Radiacion Externa", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=15, radius=40, min_opacity=0.1).add_to(myMap)
-            HeatMap([[norte_GMSP[0], este_GMSP[0], 1]], name="Radiacion Centro", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=10, radius=50, min_opacity=0.1).add_to(myMap)
+            HeatMap([[norte_GMSP[0], este_GMSP[0], 1]], name="Radiacion Centro", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=10, radius=50, min_opacity=0.9).add_to(myMap)
             HeatMap(dataHeatMap, name="Radiacion Interna", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=10, radius=50, min_opacity=0.1).add_to(myMap)
             
         if(desicion==2):
