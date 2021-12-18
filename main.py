@@ -60,21 +60,7 @@ def heatMap(norteLista, esteLista, heatmapLista):
     #print("este es la data del heatmap", data)
     return data
 
-#Menú de Bienvenida
-print("""\n Bienvenidos al Script mapa-draw.
-Elaborado por: antonio_martinez88@hotmail.com
 
-Menú:
-
-1-. Dibujar Puntos de Localización
-2-. Dibujar Polilínea
-3-. Dibujar Círculos
-4-. Dibujar Puntos de Localizacion, Polilíneas, Círculos, y P_DIST_ANG. Y transformar coordenadas a UTM
-5-. Transformar Coordenadas Grado a Coordenadas UTM
-6-. Salir
-""")
-
-userOpt=int(input("\n Elige una opción \n"))
 
 def menuPpal(user):
     if (user==1):    
@@ -322,9 +308,8 @@ def generatingMap(mapinput):
     print("\n mapa creado como: Mapa.html")
 
 if __name__ == '__main__':
-    myMap=menuPpal(userOpt)
-    generatingMap(myMap)
-    print("""\n Regresando al Menú Principal
+
+    print("""\n Menú Principal
 
     Menú:
 
@@ -334,6 +319,9 @@ if __name__ == '__main__':
     4-. Dibujar Puntos de Localizacion, Polilíneas, Círculos, y P_DIST_ANG. Y transformar coordenadas a UTM
     5-. Transformar Coordenadas Grado a Coordenadas UTM
     6-. Salir
+
+    Creador: Antonio Martínez
+    @metantonio
     """)
     userOp1=int(input("\n Elige una opción \n"))
     while userOp1<6:
@@ -349,6 +337,10 @@ if __name__ == '__main__':
         4-. Dibujar Puntos de Localizacion, Polilíneas, Círculos, y P_DIST_ANG. Y transformar coordenadas a UTM
         5-. Transformar Coordenadas Grado a Coordenadas UTM
         6-. Salir
+
+        Creador: Antonio Martínez
+        @metantonio
+        
         """)
         userOp1=int(input("\n Elige una opción \n"))
         if userOp1==6:
