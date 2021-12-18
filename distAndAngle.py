@@ -34,10 +34,10 @@ def distanceAndAngleInterpolation(latitude, longitude, angulo, distance, heat):
     heat=heat/100
     diferencia=1-heat
     lista=[]
-    for i in range(201):
+    for i in range(11):
         
-        d=i*distance/(200) #Distance in km
-        heatInterpo=1-(diferencia*i/200)
+        d=i*distance/(10) #Distance in km
+        heatInterpo=1-(diferencia*i/10)
         brng = math.radians(angulo)
         lat1 = math.radians(latitude) #Current lat point converted to radians
         lon1 = math.radians(longitude) #Current long point converted to radians
