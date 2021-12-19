@@ -218,12 +218,12 @@ def menuPpal(user):
         dataFinal=[*dataHeatMap, *heatMapData]
         #dataFinal = heatMapData+dataHeatMap
         print("\n Opciones para el mapa de radiación: ")
-        desicion=int(input("\n 1)Colorear Área de Radiación (Área Perímetro correcta) \n 2)Colorear experimental (Correcto, tarda en visualizar) \n 3)No dibujar \n"))
+        desicion=int(input("\n 1)Colorear Área de Radiación (Versión Recomendada) \n 2)Colorear experimental (En desarrollo) \n 3)No dibujar \n"))
         if (desicion==1):
             #HeatMap(heatMapData, name="Radiacion Externa", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=5, radius=25, min_opacity=0.0).add_to(myMap)
             #HeatMap([[norte_GMSP[0], este_GMSP[0], 1]], name="Radiacion Centro", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=1, radius=30, min_opacity=1.0).add_to(myMap)
             #HeatMap(dataHeatMap, name="Radiacion Interna", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, blur=1, radius=35, max_zoom=25).add_to(myMap)
-            HeatMapWithTime([dataHeatMap], name="Radiacion E.M.", gradient={0.0: 'pink', 0.15: 'blue', 0.3: 'green',  0.7: 'yellow', 1: 'red'}, radius=50, display_index=False, max_opacity=1.0).add_to(myMap)
+            HeatMapWithTime([dataHeatMap], name="Radiacion E.M.", gradient={0.0: 'pink', 0.2: 'blue', 0.4: 'green',  0.7: 'yellow', 1: 'red'}, radius=50, display_index=False, min_opacity=0, max_opacity=1.0, position='topright').add_to(myMap)
             
         if(desicion==2):
             for element in dataFinal:
