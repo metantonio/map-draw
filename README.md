@@ -37,6 +37,15 @@ pipenv run main.py
 
 El resultado se visualizará en el archivo Mapa.html, abrir desde cualquier navegador.
 
+Recientemente, se agregó un mapa de calor según la intensidad (ajustable entre 0 y 100 desde la hoja de Excel), cuyo rango de valores seguirá la siguiente escala de color como referencia:
+<!-- Sección portada del repositorio -->
+<a href="#">
+    <img src="./escala-color.jpg" />
+</a>
+
+@metantonio
+
+
 <!-- Sección portada del repositorio -->
 <a href="#">
     <img src="./portadagif.gif" />
