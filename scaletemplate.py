@@ -84,7 +84,7 @@ def leyenda(htmlMap):
         margin-bottom: 5px;
         font-weight: bold;
         font-size: 90%;
-        background-color:rgba(255, 255, 255, 0.8);
+        
         }
       .maplegend .legend-scale ul {
         margin: 0;

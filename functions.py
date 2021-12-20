@@ -10,17 +10,19 @@ def excel_Localizacion():
     #variables = int(input("\n How many variables for inputs exist? (x1, x2, ...)\n"))
     norte_GMS=[]
     este_GMS=[]
+    color_GMS=[]
     feature=[]
     for i in range(df_dataset_lenght):
         norte_GMS.append(df_excel.iloc[i,6]) #el index en para extraer data de columnas empieza en 0, por eso es columna 6 y no 7
         este_GMS.append(df_excel.iloc[i,11])
+        color_GMS.append(df_excel.iloc[i,12])
         feature.append([df_excel.iloc[i,6],df_excel.iloc[i,11]])
         #print("\n Norte: " + str(norte_GMS[i]) + " Este: " + str(este_GMS[i]))
     data = pd.DataFrame(feature, columns=["Norte/Sur","Este/Oeste"])
     print("\n Coordenadas de Localización: \n", data)
     #print(feature)
     #print("\n initial weights \n", weights)
-    return data, norte_GMS, este_GMS, feature
+    return data, norte_GMS, este_GMS, feature, color_GMS
 
 def excel_Linea():
     df_excel = pd.read_excel('data.xls', sheet_name="LINEA")

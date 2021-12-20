@@ -67,7 +67,7 @@ def heatMap(norteLista, esteLista, heatmapLista):
 
 def menuPpal(user):
     if (user==1):    
-        data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
+        data, norte_GMS, este_GMS, coordenadas, colorM = excel_Localizacion()
         #print(norte_GMS, este_GMS)
 
         #Creando Mapa
@@ -75,7 +75,7 @@ def menuPpal(user):
 
         #Agregando marcas de posición a las coordenadas
         for i in range(len(coordenadas)):
-            folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
+            folium.Marker(coordenadas[i], icon = folium.Icon(color=colorM[i]), popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
         
         
@@ -106,7 +106,7 @@ def menuPpal(user):
             folium.Circle(coordenadasC[i], radius=radio[i], popup = (str(i)+"\n Centro es: \n N:"+str(coordenadasC[i][0])+"\n E:"+str(coordenadasC[i][1])+"\n Radio(m):"+str(radio[i])), line_color='#3186cc',fill_color='#3186cc', fill=True).add_to((myMap))
 
     if(user==4):
-        data, norte_GMS, este_GMS, coordenadas = excel_Localizacion()
+        data, norte_GMS, este_GMS, coordenadas, colorM = excel_Localizacion()
         data, norte_GMSL, este_GMSL, coordenadasL = excel_Linea()
         data, norte_GMSC, este_GMSC, coordenadasC, radio = excel_Circulo()
         data, norte_GMSP, este_GMSP, coordenadasP, anguloP, distanciaP, heatmapP = excel_PuntoDistAng()
@@ -176,7 +176,7 @@ def menuPpal(user):
         #Agregando marcas de posición a las coordenadas de la hoja de Localizacion
         if (is_empty(coordenadas)==False):
             for i in range(len(coordenadas)):
-                folium.Marker(coordenadas[i],popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
+                folium.Marker(coordenadas[i], icon = folium.Icon(color=colorM[i]), popup = (str(i)+"\n N:"+str(coordenadas[i][0])+"\n E:"+str(coordenadas[i][1]))).add_to((myMap))
 
         #Agregando marcas de posición a las coordenadas de la hoja de Punto_Ang_distancia
         print("\n Dibujar marcadores de localización de los vértices del perímetro de radiación?? ")
