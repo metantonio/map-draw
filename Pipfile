@@ -19,6 +19,7 @@ jsonschema = "*"
 nbconvert = "*"
 gevent = "*"
 importlib-metadata = "*"
+branca = "*"
 
 [dev-packages]
 pyinstaller = "*"

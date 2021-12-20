@@ -6,6 +6,8 @@ from folium import plugins
 from folium.plugins import MeasureControl, MiniMap, HeatMap, HeatMapWithTime, FloatImage
 import mpu
 import itertools
+from branca.element import Template, MacroElement
+
 #import io
 #from PIL import Image
 
@@ -13,6 +15,7 @@ import itertools
 from functions import excel_Localizacion, save_csv, excel_Linea, excel_Circulo, excel_PuntoDistAng
 from eqa2utm import gms2utm, utm2gms
 from distAndAngle import distanceAndAngle, distance2points, distanceAndAngleInterpolation
+from scaletemplate import leyenda
 
 #Agregando opción de mostrar coordenadas por donde va pasando el mouse
 def formatoMouse(my_map):
@@ -228,6 +231,7 @@ def menuPpal(user):
             #imageScale=FloatImage(legend_img, bottom=0, left=20)
             #imageScale.layer_name="Escala de Color"
             #myMap.add_children(imageScale)
+            leyenda(myMap)
             
             
         if(desicion==2):
