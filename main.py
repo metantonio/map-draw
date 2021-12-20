@@ -332,7 +332,11 @@ def generatingMap(mapinput):
 
     #Generando mapa
     myMap.save('Mapa.html')
-    print("\n mapa creado como: Mapa.html")
+    print("""
+    ###########################
+    MAPA GENERADO EN: Mapa.html
+    ###########################
+    """)
 
 if __name__ == '__main__':
 

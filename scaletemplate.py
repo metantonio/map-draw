@@ -43,10 +43,16 @@ def leyenda(htmlMap):
     <div class='legend-scale content'>
       <ul class='legend-labels'>
         <li><span style='background:red;opacity:0.7;'></span>100%</li>
-        <li><span style='background:orange;opacity:0.7;'></span>70%</li>
-        <li><span style='background:green;opacity:0.7;'></span>30%</li>
-        <li><span style='background:blue;opacity:0.7;'></span>20%</li>
-        <li><span style='background:pink;opacity:0.7;'></span>0%</li>
+        <li><span style='background:rgba(255, 85, 0, 1);opacity:0.7;'></span>90%</li>
+        <li><span style='background:rgba(255, 170, 1, 1);opacity:0.7;'></span>80%</li>
+        <li><span style='background:rgba(255, 255, 1, 1);opacity:0.7;'></span>70%</li>
+        <li><span style='background:rgba(190, 235, 20, 1);opacity:0.7;'></span>60%</li>
+        <li><span style='background:rgba(128, 215, 40, 1);opacity:0.7;'></span>50%</li>
+        <li><span style='background:rgba(63, 195, 60, 1);opacity:0.7;'></span>40%</li>
+        <li><span style='background:rgba(0, 175, 80, 1);opacity:0.7;'></span>30%</li>
+        <li><span style='background:rgba(0, 113, 193, 1);opacity:0.7;'></span>20%</li>
+        <li><span style='background:rgba(129, 159, 221, 1);opacity:0.7;'></span>10%</li>
+        <li><span style='background:rgba(255, 205, 248, 1);opacity:0.7;'></span>0%</li>
 
       </ul>
     </div>
@@ -78,6 +84,7 @@ def leyenda(htmlMap):
         margin-bottom: 5px;
         font-weight: bold;
         font-size: 90%;
+        background-color:rgba(255, 255, 255, 0.8);
         }
       .maplegend .legend-scale ul {
         margin: 0;
