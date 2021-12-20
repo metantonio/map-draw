@@ -35,10 +35,12 @@ def leyenda(htmlMap):
      
     <div id='maplegend' class='maplegend' 
         style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-         border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 80px;'>
-         
-    <div class='legend-title'>Escala de Colores</div>
-    <div class='legend-scale'>
+         border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 300px;'>
+
+    <button type="button" class="collapsible">    
+        <div class='legend-title'>Escala de Colores</div>
+    </button> 
+    <div class='legend-scale content'>
       <ul class='legend-labels'>
         <li><span style='background:red;opacity:0.7;'></span>100%</li>
         <li><span style='background:orange;opacity:0.7;'></span>70%</li>
@@ -49,7 +51,24 @@ def leyenda(htmlMap):
       </ul>
     </div>
     </div>
-     
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+ 
     </body>
     </html>
 
@@ -91,6 +110,27 @@ def leyenda(htmlMap):
       .maplegend a {
         color: #777;
         }
+        .collapsible {
+          color: #777;
+          cursor: pointer;
+          background-color:rgba(255, 255, 255, 0.8);
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+        }
+        .active, .collapsible:hover {
+          background-color:rgba(255, 255, 255, 0.8);
+          opacity=0.7;
+        }
+        .content {
+          padding: 18px;
+          display: none;
+          overflow: hidden;
+          
+        }
+
     </style>
     {% endmacro %}"""
 
