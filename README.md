@@ -5,7 +5,7 @@
 </a>
 
 <a href="https://metantonio.github.io/map-draw/">
-    <h2>CLICK ME TO LOOK AN EXAMPLE</h2> 
+    CLICK ME TO LOOK AN EXAMPLE 
 </a>
 
 Este script en python se realizó para dibujar en un mapa una serie de coordenadas suministradas desde una hoja Excel, pensando en usuarios con conocimientos básicos y/o nulos de Python. 
