@@ -19,7 +19,7 @@ from scaletemplate import leyenda
 
 #Agregando opción de mostrar coordenadas por donde va pasando el mouse
 def formatoMouse(my_map):
-    formatter = "function(num) {return L.Util.formatNum(num, 3) + ' º ';};"
+    formatter = "function(num) {return L.Util.formatNum(num, 6) + ' º ';};"
     return plugins.MousePosition(
         position='topright',
         separator=' | ',
@@ -164,7 +164,8 @@ def menuPpal(user):
             norte_UTMP[i], este_UTMP[i], huso_UTMP[i]= gms2utm(norte_GMSP2[i],este_GMSP2[i])
         df5= pd.DataFrame({'Norte':norte_UTMP, 'Este':este_UTMP, 'Huso':huso_UTMP, 'Angulo giro (grados)':anguloP, 'Distancia (km)':distanciaP})
         print("\n Coordenadas patrón de radiacion en UTM \n",df5)
-           
+
+        ##EXPORTACION A EXCEL
         with pd.ExcelWriter('resultsUTM.xlsx', mode='w') as writer:
             df.to_excel(writer, sheet_name="LOCALIZACION")
             df2.to_excel(writer, sheet_name="LINEA")
@@ -192,7 +193,7 @@ def menuPpal(user):
             dist.append(mpu.haversine_distance((norte_GMSL[int(i)], este_GMSL[int(i)]), (norte_GMSL[int(i)+1], este_GMSL[int(i)+1])))
         if (is_empty(coordenadasL)==False):
             print("\n distancias entre vértices de la polilínea (km): ",dist)
-            folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Distancias entre vértices en kilómetros: \n"+str(dist)).add_to(myMap)
+            folium.PolyLine(coordenadasL, color="red", weight=2.5, opacity=1, popup="Longitud (km): \n"+str(dist)).add_to(myMap)
 
         dist=[]
         for i in range(len(este_GMSP2)-1):
